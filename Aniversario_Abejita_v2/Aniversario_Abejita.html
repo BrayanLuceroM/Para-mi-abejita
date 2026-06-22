@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aniversario Abejita</title>
+<style>
+body{
+margin:0;height:100vh;overflow:hidden;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#ffd9e8,#e9dcff,#dff4ff,#fff4d8);
+display:flex;justify-content:center;align-items:center;
+color:#6b4b6b;
+}
+.center{text-align:center;position:relative;z-index:10;padding:20px;}
+.heart{
+font-size:110px;
+animation:pulse 2.5s infinite ease-in-out;
+cursor:pointer;
+display:block;
+margin-bottom:25px;
+}
+@keyframes pulse{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.12);}
+}
+h1{margin:0;font-size:2.3rem;}
+h2{font-weight:400;max-width:700px;line-height:1.5;}
+.floating{
+position:absolute;
+opacity:0;
+animation:float 28s linear infinite;
+pointer-events:none;
+}
+@keyframes float{
+0%{opacity:0;transform:translateY(40px);}
+15%{opacity:1;}
+85%{opacity:1;}
+100%{opacity:0;transform:translateY(-140px);}
+}
+.small-heart{
+position:absolute;
+font-size:28px;
+cursor:pointer;
+animation:pulse 3s infinite;
+}
+.modal{
+position:fixed;inset:0;
+background:rgba(0,0,0,.45);
+display:none;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
+.card{
+background:white;
+max-width:550px;
+padding:28px;
+border-radius:22px;
+line-height:1.8;
+text-align:center;
+box-shadow:0 10px 40px rgba(0,0,0,.15);
+}
+button{
+border:none;padding:10px 20px;border-radius:10px;cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="center">
+<div class="heart" onclick="showMessage(0)">❤️</div>
+<h1>Brayan ❤️ Agueda</h1>
+<h2>Qué felices estos cinc... seis meses :&gt; ❤️<br>Y los que nos faltan, mi esposita ♥️</h2>
+</div>
+
+<div class="modal" id="modal">
+<div class="card">
+<p id="msg"></p>
+<button onclick="closeModal()">Cerrar ❤️</button>
+</div>
+</div>
+
+<script>
+const frases=[
+"Mi dulce esposita ❤️","Mi Abejita hermosa 🐝❤️","Mi reina ❤️","Mi amor ❤️",
+"Mi vida ❤️","Mi mujer ❤️","Mi todo ❤️","Gracias por estar en mi vida ❤️",
+"Me encanta que estés en mi vida ❤️","Gracias por estos meses juntos ❤️",
+"Eres mi lugar favorito ❤️","Contigo soy feliz ❤️","Te amo muchísimo ❤️",
+"Siempre tú ❤️","Brayan ❤️ Agueda ❤️"
+];
+
+const mensajes=[
+"Qué felices estos cinc... seis meses ❤️. No importa quién lleve la cuenta correcta, porque cada día contigo ha valido la pena. Gracias por estar en mi vida, mi dulce esposita ❤️. Te amo muchísimo ❤️.",
+"Me encanta que estés en mi vida ❤️. Gracias por acompañarme, escucharme y hacer mis días más felices. Te amo, mi amor ❤️.",
+"Mi Abejita hermosa 🐝❤️. Eres mi mujer, mi vida y mi todo ❤️. Gracias por estos meses tan bonitos juntos ❤️.",
+"Mi reina ❤️. Eres lo mejor que me ha pasado y agradezco cada momento contigo ❤️."
+];
+
+for(let i=0;i<40;i++){
+let d=document.createElement('div');
+d.className='floating';
+d.innerHTML=frases[Math.floor(Math.random()*frases.length)];
+d.style.left=Math.random()*95+'%';
+d.style.top=Math.random()*95+'%';
+d.style.animationDelay=Math.random()*25+'s';
+document.body.appendChild(d);
+}
+
+for(let i=0;i<8;i++){
+let h=document.createElement('div');
+h.className='small-heart';
+h.innerHTML=['💖','💕','💞','💗','💘'][i%5];
+h.style.left=Math.random()*90+'%';
+h.style.top=Math.random()*90+'%';
+h.onclick=()=>showMessage((i+1)%mensajes.length);
+document.body.appendChild(h);
+}
+
+function showMessage(i){
+document.getElementById('msg').textContent=mensajes[i];
+document.getElementById('modal').style.display='flex';
+}
+function closeModal(){
+document.getElementById('modal').style.display='none';
+}
+</script>
+</body>
+</html>
